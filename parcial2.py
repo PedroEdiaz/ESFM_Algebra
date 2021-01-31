@@ -1,5 +1,5 @@
 import algebra as a
-
+import math as m
 def fillPolin(f):
 	n=int(input("\nDe que grado es el polinomio?\t"))
 	for i in range(n+1):
@@ -112,24 +112,24 @@ def mcd(f,g):
 	
 def raices(f):
   print("\n$$f(x)=\t%s$$"%form(f))
-  a0=abs(int(f[0].real))
-  an=abs(int(f[-1].real))
-  
- 
+  a0=f[0]
+  an=f[-1]
+
   g=[]
   k=[]
   print("\nDivisores de $a_0$:",end="\t")
-  for i in range(a0):
-    if a0%(i+1)==0:
+  for i in range(int(abs(a0)+1)):
+    aux=a0/(i+1)
+    if (aux.real%1==0 and aux.imag%1==0):
       g.append(i+1)
       print(i+1,end=', ')
 
   print("\\\\\nDivisores de $a_n$:",end="\t")
-  for i in range(an):
-    if an%(i+1)==0:
+  for i in range(int(abs(an)+1)):
+    aux=an/(i+1)
+    if (aux.real%1==0 and aux.imag%1==0):
       k.append(i+1)
       print(i+1,end=', ')
-  
 
   root=[]
   print("$$\n\n\\begin{align*}")
@@ -147,10 +147,57 @@ def raices(f):
   print("\\end{align*}")
   
   print("\nRaices: ",end="\t")
-  for i in root: print (i,end=", ")
+  for i in root: 
+    print (i,end=", ")
 
-  for i in root:
-    while(f!=[1]):
+    while(a.Comp(f,[eval(i)])==[0j]):
       f=sintetica(f,[1,-eval(i)])
       f.pop(); f.pop(0)
+      
+  
+  if(input("\n\nProbar Imáginarios?(s/n): ")=="s"):
+    print("\nDivisores de $a_0$:",end="\t")
+    for i in range(int(abs(a0)+1)):
+      for j in range(1,int(abs(a0)+1)):
+        if (0 < abs(i+j*1j) ):
+          aux=a0/(i**2+j**2)
+          if (aux.real%1==0 and aux.imag%1==0):
+            g.append(i+j*1j)
+            print(i+j*1j,end=', ')
+            g.append(i-j*1j)
+            print(i-j*1j,end=', ')
 
+    print("\\\\\nDivisores de $a_n$:",end="\t")
+    for i in range(int(abs(an)+1)):
+      for j in range(1,int(abs(an)+1)):
+        if (0 < abs(i+j*1j) ):
+          aux=an/(i**2+j**2)
+          if (aux.real%1==0 and aux.imag%1==0):
+            k.append(i+j*1j)
+            print(i+j*1j,end=', ')
+            k.append(i-j*1j)
+            print(i-j*1j,end=', ')
+
+
+  print("$$\n\n\\begin{align*}")
+  for i in g:
+    for j in k:
+      if((j/i).imag!=0):
+        test=round(a.Comp(f,[j/i])[0].real,2)
+        print("\tf({}/{})&= {}\t&".format(j,i,test),end="")
+        if test==0:
+          root.append("{}/{}".format(j,i))
+        
+        test=round(a.Comp(f,[-j/i])[0].real,2)
+        print("\tf(-{}/{})&= {} \\\\".format(j,i,test))
+        if test==0:
+          root.append("-{}/{}".format(j,i))
+    print("\\end{align*}")
+  
+  print("\nRaices: ",end="\t")
+  for i in root: 
+    print (i,end=", ")
+
+    while(a.Comp(f,[eval(i)])==[0j]):
+      f=sintetica(f,[1,-eval(i)])
+      f.pop(); f.pop(0)
