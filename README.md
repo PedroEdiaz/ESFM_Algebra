@@ -10,3 +10,4 @@ tex y lo compila, Incluye opción para cálcular. y usa de paquete `amsmath`
 5.  Dividir Polinomio
 6.  Divición Sintética
 7.  Maximo Común Divisor de Polinomio
+8.	Racices Racionales
