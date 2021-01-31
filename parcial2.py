@@ -76,7 +76,7 @@ def divPolin(f,g):
 	return(aux[len(f)-len(g)+2:])
 
 def sintetica(f,g):
-	aux1=[-g[0]/g[1],0]
+	aux1=[-g[1]/g[0],0]
 	aux2=[0,f[0]]
 	for i in range(1,len(f)):
 		aux=round((aux2[i]*aux1[0]).real,3)+round((aux2[i]*aux1[0]).imag,3)*1j
@@ -96,6 +96,8 @@ def sintetica(f,g):
 	print("\\\\")
 	print("\\end{tabular}\n\\end{center}\n")
 
+	return [ i for i in aux2 ]
+
 def mcd(f,g):
 	while True:
 		r=g
@@ -108,4 +110,47 @@ def mcd(f,g):
 		if(len( g)==1):break
 			
 	
+def raices(f):
+  print("\n$$f(x)=\t%s$$"%form(f))
+  a0=abs(int(f[0].real))
+  an=abs(int(f[-1].real))
+  
+ 
+  g=[]
+  k=[]
+  print("\nDivisores de $a_0$:",end="\t")
+  for i in range(a0):
+    if a0%(i+1)==0:
+      g.append(i+1)
+      print(i+1,end=', ')
+
+  print("\\\\\nDivisores de $a_n$:",end="\t")
+  for i in range(an):
+    if an%(i+1)==0:
+      k.append(i+1)
+      print(i+1,end=', ')
+  
+
+  root=[]
+  print("$$\n\n\\begin{align*}")
+  for i in g:
+    for j in k:
+      test=round(a.Comp(f,[j/i])[0].real,2)
+      print("\tf({}/{})&= {}\t&".format(j,i,test),end="")
+      if test==0:
+        root.append("{}/{}".format(j,i))
+        
+      test=round(a.Comp(f,[-j/i])[0].real,2)
+      print("\tf(-{}/{})&= {} \\\\".format(j,i,test))
+      if test==0:
+        root.append("-{}/{}".format(j,i))
+  print("\\end{align*}")
+  
+  print("\nRaices: ",end="\t")
+  for i in root: print (i,end=", ")
+
+  for i in root:
+    while(f!=[1]):
+      f=sintetica(f,[1,-eval(i)])
+      f.pop(); f.pop(0)
 

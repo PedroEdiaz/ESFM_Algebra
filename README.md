@@ -7,6 +7,6 @@ tex y lo compila, Incluye opción para cálcular. y usa de paquete `amsmath`
 2.  MCD por Euclides
 3.  Raices Cuadradas de complejos
 4.  Raices Enesimas de complejos
-5.  Dividir de Polinomio
+5.  Dividir Polinomio
 6.  Divición Sintética
 7.  Maximo Común Divisor de Polinomio

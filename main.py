@@ -9,9 +9,10 @@ Programa para Álgebra I-1
 	3) Raices Cuadradas de complejos
 	4) Raices Enesimas de complejos
 Programa para Álgebra I-2
-	5) Dividir de Polinomio
+	5) Dividir Polinomio
 	6) Divición Sintética
 	7) Maximo Común Divisor de Polinomio
+	8) Racices Racionales
 	""")
 	inp = int(input("> "))
 
@@ -34,6 +35,9 @@ Programa para Álgebra I-2
 		p2.fillPolin(f:=[]);
 		p2.fillPolin(g:=[]); 
 		p2.mcd(f,g)
+	elif (inp == 8):
+		p2.fillPolin(f:=[]); 
+		p2.raices(f)
 	else: print("\nfuera de rango")
 		
 
