@@ -2,7 +2,7 @@ import parcial1 as p1
 import parcial2 as p2
 
 while True:
-	print("""
+	print("""\n\t0) Salir
 Programa para Álgebra I-1
 	1) Factorización en Primos
 	2) MCD por Euclides
@@ -17,8 +17,9 @@ Programa para Álgebra I-2
 	inp = int(input("> "))
 
 	print('\n\section{Ejercicio}\n °')
-
-	if (inp == 1):p1.fact()
+	
+	if(inp == 0):quit()
+	elif (inp == 1):p1.fact()
 	elif (inp == 2):p1.mcd()
 	elif (inp == 3):p1.cuad()
 	elif (inp == 4):p1.raices()
